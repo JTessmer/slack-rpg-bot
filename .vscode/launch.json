@@ -1,0 +1,15 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Attach to Node",
+			"type": "node",
+			"request": "attach",
+			"restart": true,
+			"processId": "${command:PickProcess}",
+			"skipFiles": [
+				"<node_internals>/**"
+			]
+		}
+	]
+}
