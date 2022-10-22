@@ -1,14 +1,17 @@
 {
-	"eslint.validate": ["javascript","typescript"],
-	"editor.codeActionsOnSave": {
-		"source.fixAll": true
-	},
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"prettier.requireConfig": true,
-	"editor.formatOnSave": true,
-	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"typescript.preferences.quoteStyle": "single",
-	"typescript.format.semicolons": "remove"
+  "eslint.validate": ["javascript", "typescript"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "source.fixAll.markdownlint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.requireConfig": true,
+  "editor.formatOnSave": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.format.semicolons": "remove",
+  "editor.tabSize": 2
 }

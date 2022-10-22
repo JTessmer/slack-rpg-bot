@@ -36,9 +36,18 @@
       }
     ],
     "linebreak-style": ["error", "unix"],
-    "no-console": "error",
+    "no-console": "warn",
     "prettier/prettier": "error"
   },
+  "overrides": [
+    {
+      "files": "**/index.ts",
+      "plugins": ["sort-exports"],
+      "rules": {
+        "sort-exports/sort-exports": ["error"]
+      }
+    }
+  ],
   "settings": {
     "import/resolver": { "typescript": {} }
   }
