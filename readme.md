@@ -29,3 +29,25 @@ TBD
 
 - Slack SDK: <https://github.com/slackapi/node-slack-sdk>
 - Fastify: <https://www.fastify.io/docs/latest/Guides/Getting-Started>
+
+### Example Request Body from Slack
+
+This is example body content that is sent by Slack when a user uses the `/roll` command:
+
+```javascript
+{
+  token: 'abc123',
+  team_id: 'def456',
+  team_domain: 'myorganization',
+  channel_id: 'ghi789',
+  channel_name: 'directmessage',
+  user_id: 'xyz098',
+  user_name: 'sam',
+  command: '/roll',
+  text: '1d6 +2',
+  api_app_id: 'uvw765',
+  is_enterprise_install: 'false',
+  response_url: 'https://hooks.slack.com/commands/abcdef-url',
+  trigger_id: '12345.67890.abc123'
+}
+```
