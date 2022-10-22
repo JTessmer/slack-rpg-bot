@@ -1,15 +1,18 @@
 import * as dotenv from 'dotenv'
 dotenv.config()
 import Fastify from 'fastify'
-import { diceRoll, ping } from '~/controllers'
+import * as routers from '~/routers'
 import { PORT } from '~/util/env'
 
 const server = Fastify({ logger: true })
 
-server.get('/ping', ping)
+async function start() {
+  await server.register(routers.v1, { prefix: '/v1' })
 
-server.get('/roll', diceRoll)
+  server.listen({ port: PORT }, (err) => {
+    if (err) throw err
+  })
+}
 
-server.listen({ port: PORT }, (err) => {
-  if (err) throw err
-})
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+start()
