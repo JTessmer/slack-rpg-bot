@@ -2,4 +2,6 @@
 /coverage
 /dist
 
+/.env
+
 npm-debug.log*
