@@ -7,6 +7,7 @@
     "dist"
   ],
   "scripts": {
+    "start": "node ./dist/main.js",
     "build": "rimraf ./dist/* && tsc && tsc-alias",
     "dev": "nodemon",
     "lint": "npx eslint ./src",
