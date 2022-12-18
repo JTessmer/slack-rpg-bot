@@ -18,5 +18,5 @@
     },
     "outDir": "dist"
   },
-  "include": ["src/**/*", "prisma/seed/**/*"]
+  "include": ["src/**/*"]
 }

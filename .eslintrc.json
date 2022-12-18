@@ -18,6 +18,12 @@
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {
+        "ts-ignore": "allow-with-description"
+      }
+    ],
     "import/no-unresolved": "error",
     "import/order": [
       "error",
@@ -45,6 +51,18 @@
       "plugins": ["sort-exports"],
       "rules": {
         "sort-exports/sort-exports": ["error"]
+      }
+    },
+    {
+      "files": "**/*.test.ts",
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": [
+          "error",
+          {
+            "ts-ignore": "allow-with-description",
+            "ts-expect-error": "allow-with-description"
+          }
+        ]
       }
     }
   ],

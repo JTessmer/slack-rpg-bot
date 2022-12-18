@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "start": "node ./dist/main.js",
+    "start": "NODE_ENV=production node ./dist/main.js",
     "build": "rimraf ./dist/* && tsc && tsc-alias",
     "postbuild": "cp package*.json dist && cd dist && npm ci --production",
     "predeploy": "npm run build",
@@ -21,7 +21,7 @@
     "prisma:regen": "npm rm @prisma/client && npm i @prisma/client && npx prisma generate"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed/index.ts"
+    "seed": "ts-node src/database/seed/index.ts"
   },
   "repository": {
     "type": "git",
@@ -60,6 +60,7 @@
     "@fastify/formbody": "^7.3.0",
     "@prisma/client": "^4.8.0",
     "dotenv": "^16.0.3",
-    "fastify": "^4.9.2"
+    "fastify": "^4.9.2",
+    "winston": "^3.8.2"
   }
 }
