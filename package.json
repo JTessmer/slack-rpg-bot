@@ -17,7 +17,11 @@
     "lint": "npx eslint ./src",
     "test": "jest --maxWorkers=25%",
     "test:coverage": "jest --coverage --maxWorkers=25%",
-    "test:watch": "jest --watch --maxWorkers=25%"
+    "test:watch": "jest --watch --maxWorkers=25%",
+    "prisma:regen": "npm rm @prisma/client && npm i @prisma/client && npx prisma generate"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed/index.ts"
   },
   "repository": {
     "type": "git",
@@ -44,7 +48,7 @@
     "jest-watch-typeahead": "^2.2.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
-    "prisma": "^4.7.1",
+    "prisma": "^4.8.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
@@ -54,6 +58,7 @@
   },
   "dependencies": {
     "@fastify/formbody": "^7.3.0",
+    "@prisma/client": "^4.8.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.9.2"
   }

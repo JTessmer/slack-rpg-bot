@@ -10,59 +10,90 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//----- Enums -----//
+
+enum TalentType {
+  POWER_ATTACK
+}
+
+enum Class {
+  FIGHTER
+}
+
+enum EquipmentSlot {
+  CHEST
+}
+
 enum Race {
   HUMAN
   ELF
   DWARF
 }
 
-enum Class {
-  FIGHTER
-  RANGER
-}
-
-model CreatureTemplate {
-  id            Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
-}
-
-model Creature {
-  id            Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
-  userName      String?              @db.VarChar(255)
-  spells        SpellsForCreature[]
-}
-
-enum GearSlot {
-  CHEST
-  LEGS
-}
-
-model Gear {
-  id            Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
-  slot          GearSlot
+enum SpellType {
+  FIREBALL
 }
 
 enum WeaponType {
-  AXE
   SWORD
-  BOW
 }
 
-model Weapon {
-  id            Int                   @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
-  playerUsable  Boolean               @default(true) // Use 'false' for teeth, claws, etc.
-  type          WeaponType
+//----- Models -----//
+
+model Creature {
+  id              Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  name            String               @db.VarChar(255) @unique
+  playerName      String?              @db.VarChar(255)
+  health          Int                  @db.SmallInt
+  class           Class
+  race            Race
+  // Abilities
+  spells          Spell[]
+  talents         Talent[]
+  // Equipment
+  equipment       Equipment[]
+  weapon          Weapon               @relation(fields: [weaponId], references: [id])
+  weaponId        Int                  @db.UnsignedInt
+  // Core Stats
+  strength        Int                  @db.TinyInt @default(10)
+  intelligence    Int                  @db.TinyInt @default(10)
+  dexterity       Int                  @db.TinyInt @default(10)
+  fortitude       Int                  @db.TinyInt @default(10)
+}
+
+model Equipment {
+  id              Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  name            String               @db.VarChar(255) @unique
+  armor           Int                  @db.TinyInt
+  creature        Creature[]
+  description     String               @db.Text
+  slot            EquipmentSlot
 }
 
 model Spell {
-  id            Int                   @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
-  creatures     SpellsForCreature[]
+  id              Int                   @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  name            String                @db.VarChar(255) @unique
+  creatures       Creature[]
+  description     String                @db.Text
+  spellType       SpellType
 }
 
-model SpellsForCreature {
-  creature      Creature              @relation(fields: [creatureId], references: [id])
-  creatureId    Int                   @db.UnsignedInt
-  spell         Spell                 @relation(fields: [spellId], references: [id])
-  spellId       Int                   @db.UnsignedInt
+model Talent {
+  id              Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  name            String               @db.VarChar(255) @unique
+  creatures       Creature[]
+  description     String               @db.Text
+  talentType     TalentType
+}
 
-  @@id([creatureId, spellId])
+model Weapon {
+  id              Int                   @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  name            String                @db.VarChar(255) @unique
+  description     String                @db.Text
+  playerUsable    Boolean               @default(true) // Use 'false' for teeth, claws, etc.
+  type            WeaponType
+  toHit           Int                   @db.TinyInt
+  damageDieSides  Int                   @db.TinyInt
+  damageDieCount  Int                   @db.TinyInt
+  creatures       Creature[]
 }
