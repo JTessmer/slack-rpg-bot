@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Race {
+  HUMAN
+  ELF
+  DWARF
+}
+
+enum Class {
+  FIGHTER
+  RANGER
+}
+
+model CreatureTemplate {
+  id            Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+}
+
+model Creature {
+  id            Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  userName      String?              @db.VarChar(255)
+  spells        SpellsForCreature[]
+}
+
+enum GearSlot {
+  CHEST
+  LEGS
+}
+
+model Gear {
+  id            Int                  @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  slot          GearSlot
+}
+
+enum WeaponType {
+  AXE
+  SWORD
+  BOW
+}
+
+model Weapon {
+  id            Int                   @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  playerUsable  Boolean               @default(true) // Use 'false' for teeth, claws, etc.
+  type          WeaponType
+}
+
+model Spell {
+  id            Int                   @id @default(autoincrement()) @db.UnsignedInt @unique(map: "id_UNIQUE")
+  creatures     SpellsForCreature[]
+}
+
+model SpellsForCreature {
+  creature      Creature              @relation(fields: [creatureId], references: [id])
+  creatureId    Int                   @db.UnsignedInt
+  spell         Spell                 @relation(fields: [spellId], references: [id])
+  spellId       Int                   @db.UnsignedInt
+
+  @@id([creatureId, spellId])
+}
