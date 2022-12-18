@@ -1,9 +1,10 @@
+import { logger } from '../../../util/logger'
 import type { PrismaClient } from '@prisma/client'
 
 export async function seedSpells(prisma: PrismaClient) {
-  console.log('--- Seeding Spells ---')
+  logger.debug('- Seeding Spells')
 
-  const fireball = await prisma.spell.upsert({
+  await prisma.spell.upsert({
     where: { name: 'Fireball' },
     update: {},
     create: {
@@ -12,6 +13,4 @@ export async function seedSpells(prisma: PrismaClient) {
       spellType: 'FIREBALL'
     }
   })
-
-  console.log({ fireball })
 }

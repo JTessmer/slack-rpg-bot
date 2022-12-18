@@ -1,9 +1,10 @@
+import { logger } from '../../../util/logger'
 import type { PrismaClient } from '@prisma/client'
 
 export async function seedWeapons(prisma: PrismaClient) {
-  console.log('--- Seeding Weapons ---')
+  logger.debug('- Seeding Weapons')
 
-  const ironSword = await prisma.weapon.upsert({
+  await prisma.weapon.upsert({
     where: { name: 'Iron Sword' },
     update: {},
     create: {
@@ -16,6 +17,4 @@ export async function seedWeapons(prisma: PrismaClient) {
       damageDieCount: 6
     }
   })
-
-  console.log({ ironSword })
 }

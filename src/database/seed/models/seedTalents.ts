@@ -1,9 +1,10 @@
+import { logger } from '../../../util/logger'
 import type { PrismaClient } from '@prisma/client'
 
 export async function seedTalents(prisma: PrismaClient) {
-  console.log('--- Seeding Talents ---')
+  logger.debug('- Seeding Talents')
 
-  const powerAttack = await prisma.talent.upsert({
+  await prisma.talent.upsert({
     where: { name: 'Power Attack' },
     update: {},
     create: {
@@ -12,6 +13,4 @@ export async function seedTalents(prisma: PrismaClient) {
       talentType: 'POWER_ATTACK'
     }
   })
-
-  console.log({ powerAttack })
 }

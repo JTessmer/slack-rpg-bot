@@ -1,9 +1,10 @@
+import { logger } from '../../../util/logger'
 import type { PrismaClient } from '@prisma/client'
 
 export async function seedEquipment(prisma: PrismaClient) {
-  console.log('--- Seeding Equipment ---')
+  logger.debug('- Seeding Equipment')
 
-  const leatherVest = await prisma.equipment.upsert({
+  await prisma.equipment.upsert({
     where: { name: 'Leather Vest' },
     update: {},
     create: {
@@ -13,6 +14,4 @@ export async function seedEquipment(prisma: PrismaClient) {
       slot: 'CHEST'
     }
   })
-
-  console.log({ leatherVest })
 }
