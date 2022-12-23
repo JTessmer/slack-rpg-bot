@@ -9,8 +9,7 @@ module.exports = {
       max_restarts: 50,
       watch: false,
       env: {
-        PORT: 4000,
-        VERBOSE: true
+        PORT: 4000
       }
     }
   ]

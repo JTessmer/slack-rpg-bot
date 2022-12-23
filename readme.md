@@ -10,6 +10,23 @@ This project uses ESLint, Prettier, and Typescript. It's strongly encouraged to 
 
 After cloning this repository, dependencies must be installed. It is recommended to use `npm ci` to install dependencies -- instead of `npm i` or `npm install` -- as this will ensure a clean install and an unmodified package.lock file.
 
+### Environment Variables
+
+In the project root, create a new file called `.env`. Copy the content from `.env.example` file into `.env`, modifying as needed for your environment.
+
+### Database Setup
+
+To develop, you must have access to a MySQL (or MariaDB) database server. Server setup is outside the scope of this document.
+
+Once you have a server ready, setup can by done by:
+
+1. Ensure the `.env` file's `DATABASE_URL` value is configured by replacing the `{variables}` below with the correct values:
+   - DATABASE_URL="mysql://`{username}`:`{password}`@`{hostname}`:`{port}`/`{database name}`"
+2. In a terminal, run `npx prisma dev migrate` to update your database schema to match the codebase's models.
+3. Run `npx prisma db seed` to populate your database with seed data.
+
+### NPM Scripts
+
 The following scripts have been made available:
 
 | npm run ...   | Action                                                                   |
@@ -23,12 +40,14 @@ The following scripts have been made available:
 
 ## Deploying
 
-TBD
+Deployment can currently only be done by those with SSH access to the server and the appropriate permissions.
 
 ## Reference Documentation
 
 - Slack SDK: <https://github.com/slackapi/node-slack-sdk>
+  - Slack Block Kit Builder: <https://api.slack.com/tools/block-kit-builder>
 - Fastify: <https://www.fastify.io/docs/latest/Guides/Getting-Started>
+- Prisma: <https://www.prisma.io/docs>
 
 ### Example Request Body from Slack
 
